@@ -2,6 +2,7 @@ import {Anime} from "../lib/aliases"
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
+import {useDrag} from "react-dnd";
 
 interface Props {
     anime: Anime
@@ -77,11 +78,22 @@ const AnimeImage = styled(Image)<{ hovered: boolean }>`
 `
 
 const AnimeElement : React.FunctionComponent<Props> = props => {
-    const {anime} = props
+    const { anime } = props
     const [hovered, setHovered] = React.useState(false)
 
+    const [, drag] = useDrag(() => ({
+        type: anime.list_status.score.toString(),
+        item: anime,
+    }))
+
+    const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
+        event.dataTransfer.clearData()
+        event.dataTransfer.setData("text/animeScore", anime.list_status.score.toString())
+        event.dataTransfer.effectAllowed = "move"
+    }
+
     return (
-        <AnimeContainer onMouseOver={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+        <AnimeContainer ref={drag} onMouseOver={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
             <AnimeImageContainer>
                 <AnimeImage src={anime.node.main_picture!.medium} alt={anime.node.title} width={225} height={317} hovered={hovered} />
             </AnimeImageContainer>

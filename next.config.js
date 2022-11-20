@@ -7,7 +7,6 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'api-cdn.myanimelist.net',
-        port: '',
       },
     ]
   },

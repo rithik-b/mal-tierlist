@@ -8,7 +8,7 @@ export function useWatchedAnime() {
         let page = 1
 
         while (true) {
-            const { data } = await axios.get<Anime[]>(`/api/mal/get-watched?page=${page}`)
+            const { data } = await axios.get<Anime[]>(`/api/mal/watched-list?page=${page}`)
             if (data.length === 0)
                 break
             allAnime.push(...data)
