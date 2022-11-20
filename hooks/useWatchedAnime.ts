@@ -25,6 +25,5 @@ export function useWatchedAnime() {
         }
 
         return animeByScore
-    }, {
     }).data
 }

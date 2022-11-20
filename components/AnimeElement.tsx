@@ -37,17 +37,12 @@ const AnimeTitle = styled.h4<{ hovered: boolean }>`
   };
 `
 
-const AnimeImageContainer = styled.div`
+const AnimeImageContainer = styled.div<{ hovered: boolean }>`
   width: 168.75px;
   height: 235.5px;
   grid-column: 1 / span 3;
   grid-row: 1 / span 3;
-`
 
-const AnimeImage = styled(Image)<{ hovered: boolean }>`
-  width: 100%;
-  height: 100%;
-  
   ${props => props.hovered ? `
     animation-name: fadein;
     animation-duration: 0.5s;
@@ -57,7 +52,7 @@ const AnimeImage = styled(Image)<{ hovered: boolean }>`
     animation-duration: 0.5s;
     filter: brightness(1);
    `}
-  
+
   @keyframes fadein {
     from {
       filter: brightness(1);
@@ -66,15 +61,20 @@ const AnimeImage = styled(Image)<{ hovered: boolean }>`
       filter: brightness(0.5);
     }
   };
-  
+
   @keyframes fadeout {
     from {
-        filter: brightness(0.5);
+      filter: brightness(0.5);
     }
     to {
-        filter: brightness(1);
+      filter: brightness(1);
     }
   };
+`
+
+const AnimeImage = styled(Image)`
+  width: 100%;
+  height: 100%;
 `
 
 const AnimeElement : React.FunctionComponent<Props> = props => {
@@ -94,8 +94,8 @@ const AnimeElement : React.FunctionComponent<Props> = props => {
 
     return (
         <AnimeContainer ref={drag} onMouseOver={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-            <AnimeImageContainer>
-                <AnimeImage src={anime.node.main_picture!.medium} alt={anime.node.title} width={225} height={317} hovered={hovered} />
+            <AnimeImageContainer hovered={hovered}>
+                <AnimeImage src={anime.node.main_picture!.medium} alt={anime.node.title} width={225} height={317} />
             </AnimeImageContainer>
             <AnimeTitle hovered={hovered}><a href={`https://myanimelist.net/anime/${anime.node.id}`} target="_blank" rel="noopener noreferrer">{anime.node.title}</a></AnimeTitle>
         </AnimeContainer>
