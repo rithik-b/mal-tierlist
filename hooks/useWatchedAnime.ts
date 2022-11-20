@@ -26,7 +26,5 @@ export function useWatchedAnime() {
 
         return animeByScore
     }, {
-        refetchOnReconnect: false,
-        refetchOnWindowFocus: false,
     }).data
 }

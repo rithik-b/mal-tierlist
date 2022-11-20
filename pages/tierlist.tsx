@@ -5,22 +5,22 @@ import styled from "styled-components";
 import {TierColor, TierColorForAnimeScore} from "./models/TierColor";
 
 const TierContainer = styled.div`
-  display: flex;
+  display: grid;
   flex-direction: row;
   border: 2px solid black;
   background-color: #222222;
+  grid-template-columns: 1fr 8fr;
 `
 
 const TierHeaderContainer = styled.div<{ tierColor: TierColor }>`
   display: grid;
   grid-template-rows: 1fr auto 1fr;
   grid-template-columns: 1fr auto 1fr;
+  grid-column: 1;
   background-color: ${props => props.tierColor};
 `
 
 const TierHeader = styled.h1`
-  width: 250px;
-  height: 80px;
   color: black;
   text-align: center;
   grid-column: 2;
@@ -31,6 +31,7 @@ const TierAnimeContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  grid-column: 2;
 `
 
 export default function TierListPage() {

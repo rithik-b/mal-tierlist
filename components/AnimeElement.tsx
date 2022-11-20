@@ -13,7 +13,7 @@ const AnimeContainer = styled.div`
   display: grid;
 `
 
-const AnimeTitle = styled.h3<{ hovered: boolean }>`
+const AnimeTitle = styled.h4<{ hovered: boolean }>`
   grid-column: 2;
   grid-row: 2;
   text-align: center;
@@ -36,9 +36,16 @@ const AnimeTitle = styled.h3<{ hovered: boolean }>`
   };
 `
 
-const AnimeImage = styled(Image)<{ hovered: boolean }>`
+const AnimeImageContainer = styled.div`
+  width: 168.75px;
+  height: 235.5px;
   grid-column: 1 / span 3;
   grid-row: 1 / span 3;
+`
+
+const AnimeImage = styled(Image)<{ hovered: boolean }>`
+  width: 100%;
+  height: 100%;
   
   ${props => props.hovered ? `
     animation-name: fadein;
@@ -75,8 +82,10 @@ const AnimeElement : React.FunctionComponent<Props> = props => {
 
     return (
         <AnimeContainer onMouseOver={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-            <AnimeImage src={anime.node.main_picture!.medium} alt={anime.node.title} width={168.75} height={235.5} hovered={hovered} />
-            <AnimeTitle hovered={hovered}>{anime.node.title}</AnimeTitle>
+            <AnimeImageContainer>
+                <AnimeImage src={anime.node.main_picture!.medium} alt={anime.node.title} width={225} height={317} hovered={hovered} />
+            </AnimeImageContainer>
+            <AnimeTitle hovered={hovered}><a href={`https://myanimelist.net/anime/${anime.node.id}`} target="_blank" rel="noopener noreferrer">{anime.node.title}</a></AnimeTitle>
         </AnimeContainer>
     )
 }
