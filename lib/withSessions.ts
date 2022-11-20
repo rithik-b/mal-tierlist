@@ -26,12 +26,7 @@ export function withSessionSsr<
 
 declare module "iron-session" {
     interface IronSessionData {
-        authentication?: {
-            codeVerifier?: string
-        }
-        user?: {
-            accessToken?: string,
-            refreshToken?: string,
-        }
+        codeVerifier?: string,
+        malToken?: string,
     }
 }

@@ -1,3 +1,3 @@
 export type OauthUrlResponse = {
-  oauthUrl: string,
+  url: string,
 }

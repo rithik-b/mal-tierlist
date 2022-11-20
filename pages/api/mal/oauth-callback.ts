@@ -3,12 +3,8 @@ import {OauthCallbackRequest} from "../../models/OauthCallbackRequest";
 import {withSessionRoute} from "../../../lib/withSessions";
 import axios from "axios";
 import * as queryString from "querystring";
-import {OauthAuthenticationResponse} from "../../models/OauthAuthenticationResponse";
 
-async function route(
-    req: NextApiRequest,
-    res: NextApiResponse
-) {
+async function route(req: NextApiRequest, res: NextApiResponse) {
     const query = req.query as OauthCallbackRequest
 
     const params = {
@@ -17,19 +13,16 @@ async function route(
         grant_type: "authorization_code",
         code: query.code,
         redirect_uri: `${process.env.BASE_URL}/api/mal/oauth-callback`,
-        code_verifier: req.session.authentication!.codeVerifier,
+        code_verifier: req.session.codeVerifier,
     }
 
-    const authenticationResponse = await axios.post<OauthAuthenticationResponse>("https://myanimelist.net/v1/oauth2/token", queryString.stringify(params),{
+    const authenticationResponse = await axios.post("https://myanimelist.net/v1/oauth2/token", queryString.stringify(params),{
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
         },
     })
 
-    req.session.user = {
-        accessToken: authenticationResponse.data.access_token,
-        refreshToken: authenticationResponse.data.refresh_token,
-    }
+    req.session.malToken = JSON.stringify(authenticationResponse.data)
     await req.session.save()
 
     res.redirect("/tierlist")

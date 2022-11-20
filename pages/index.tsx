@@ -1,12 +1,10 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import useSWR from 'swr'
-import fetcher from "../lib/fetcher";
-import {OauthUrlResponse} from "./models/OauthUrlResponse";
 import React from "react";
+import {useOauthUrl} from "../hooks/useOauthUrl";
 
 export default function Home() {
-    const { data, error } = useSWR<OauthUrlResponse>('/api/mal/oauth-url', fetcher)
+    const oauthUrl = useOauthUrl()
 
     return (
     <div className={styles.container}>
@@ -21,9 +19,9 @@ export default function Home() {
           Anime Tier List
         </h1>
 
-          {!!data && !error ? (
+          {!!oauthUrl ? (
               <div className={styles.grid}>
-                  <a href={data.oauthUrl} className={styles.card}>
+                  <a href={oauthUrl.url} className={styles.card}>
                       <h2>Login &rarr;</h2>
                       <p>Login to MyAnimeList to get started</p>
                   </a>

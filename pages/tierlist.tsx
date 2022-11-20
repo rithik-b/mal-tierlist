@@ -1,8 +1,12 @@
-export default function TierListPage() {
+import {useWatchedAnime} from "../hooks/useWatchedAnime";
 
+export default function TierListPage() {
+    const watchedAnime = useWatchedAnime()
     return (
         <div>
-            <h1>Tier List</h1>
+            <span>
+                {JSON.stringify(watchedAnime ?? [])}
+            </span>
         </div>
     )
 }
