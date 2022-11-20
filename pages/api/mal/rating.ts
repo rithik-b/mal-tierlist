@@ -1,7 +1,7 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {getMalAccount} from "../../../lib/getMalAccount";
 import {withSessionRoute} from "../../../lib/withSessions";
-import {SetRatingRequest} from "../../models/SetRatingRequest";
+import {SetRatingRequest} from "../../../models/SetRatingRequest";
 
 async function route(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "PUT")

@@ -1,4 +1,4 @@
-import {AnimeScore} from "../../lib/aliases";
+import {AnimeScore} from "../lib/aliases";
 
 export enum TierColor {
     S = '#ff7f7e',

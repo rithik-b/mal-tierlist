@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import {OauthUrlResponse} from "../../models/OauthUrlResponse"
+import {OauthUrlResponse} from "../../../models/OauthUrlResponse"
 import pkceChallenge from "pkce-challenge"
 import {withSessionRoute} from "../../../lib/withSessions";
 

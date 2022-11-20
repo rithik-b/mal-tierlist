@@ -1,5 +1,5 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {OauthCallbackRequest} from "../../models/OauthCallbackRequest";
+import {OauthCallbackRequest} from "../../../models/OauthCallbackRequest";
 import {withSessionRoute} from "../../../lib/withSessions";
 import axios from "axios";
 import * as queryString from "querystring";

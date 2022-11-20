@@ -1,6 +1,6 @@
 import {withSessionRoute} from "../../../lib/withSessions";
 import {NextApiRequest, NextApiResponse} from "next";
-import {GetWatchedRequest} from "../../models/GetWatchedRequest";
+import {GetWatchedRequest} from "../../../models/GetWatchedRequest";
 import {getMalAccount} from "../../../lib/getMalAccount";
 
 async function route(req: NextApiRequest, res: NextApiResponse) {

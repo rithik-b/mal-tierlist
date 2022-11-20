@@ -1,5 +1,5 @@
 import {Anime, AnimeScore, parseAnimeScore} from "../lib/aliases";
-import {TierColor, TierColorForAnimeScore} from "../pages/models/TierColor";
+import {TierColor, TierColorForAnimeScore} from "../models/TierColor";
 import AnimeElement from "./AnimeElement";
 import React from "react";
 import styled from "styled-components";

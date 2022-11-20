@@ -1,4 +1,4 @@
-import {AnimeScore} from "../../lib/aliases";
+import {AnimeScore} from "../lib/aliases";
 
 export type SetRatingRequest = {
     animeId?: number

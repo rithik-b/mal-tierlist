@@ -1,6 +1,6 @@
 import {useQuery} from "react-query";
 import axios from "axios";
-import {UserResponse} from "../pages/models/UserResponse";
+import {UserResponse} from "../models/UserResponse";
 
 export function useQueryUser() {
     return useQuery(["user"], async function() {

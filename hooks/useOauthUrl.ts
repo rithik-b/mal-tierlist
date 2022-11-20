@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import axios from "axios";
-import {OauthUrlResponse} from "../pages/models/OauthUrlResponse";
+import {OauthUrlResponse} from "../models/OauthUrlResponse";
 
 export function useOauthUrl() {
     return useQuery(["oauthUrl"], async function() {
