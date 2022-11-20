@@ -1,6 +1,6 @@
 import {useQuery} from "react-query";
 import axios from "axios";
-import {Mal} from "node-myanimelist";
+import {Anime, AnimeScore} from "../lib/aliases";
 
 export function useWatchedAnime() {
     return useQuery(["watchedAnime"], async function() {
@@ -8,14 +8,23 @@ export function useWatchedAnime() {
         let page = 1
 
         while (true) {
-            const { data } = await axios.get<Mal.User.AnimeListItem<Mal.Common.WorkBase, Mal.Anime.AnimeListStatusBase>[]>(`/api/mal/get-watched?page=${page}`)
+            const { data } = await axios.get<Anime[]>(`/api/mal/get-watched?page=${page}`)
             if (data.length === 0)
                 break
             allAnime.push(...data)
             page++
         }
 
-        return allAnime
+        const animeByScore = new Map<AnimeScore, Anime[]>()
+        for (const anime of allAnime) {
+            const score = anime.list_status.score
+            if (animeByScore.has(score))
+                animeByScore.get(score)!.push(anime)
+            else
+                animeByScore.set(score, [anime])
+        }
+
+        return animeByScore
     }, {
         refetchOnReconnect: false,
         refetchOnWindowFocus: false,
