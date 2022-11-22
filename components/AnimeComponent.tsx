@@ -18,6 +18,7 @@ const AnimeTitle = styled.h4<{ hovered: boolean }>`
   grid-column: 2;
   grid-row: 2;
   text-align: center;
+  color: white;
   
   ${props => props.hovered ? `
     animation-name: fadeIn;

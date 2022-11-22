@@ -18,6 +18,10 @@ const HeaderContainer = styled.div`
   padding: 0px 30px;
 `
 
+const Header = styled.h2`
+    color: white;
+`
+
 export default function TierListPage() {
     const router = useRouter()
     const { data: user, error } = useQueryUser()
@@ -36,8 +40,8 @@ export default function TierListPage() {
                 </Head>
 
                 <HeaderContainer>
-                    <h2>{user?.name ? `${user.name}'s ` : ""}Anime Tier List</h2>
-                    <h2><a href="" onClick={() => router.push("/api/logout")}>Logout</a></h2>
+                    <Header>{user?.name ? `${user.name}'s ` : ""}Anime Tier List</Header>
+                    <Header><a href="" onClick={() => router.push("/api/logout")}>Logout</a></Header>
                 </HeaderContainer>
                 {!!watchedAnime ?
                     <>
