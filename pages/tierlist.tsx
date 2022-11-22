@@ -41,7 +41,7 @@ export default function TierListPage() {
 
                 <HeaderContainer>
                     <Header>{user?.name ? `${user.name}'s ` : ""}Anime Tier List</Header>
-                    <Header><a href="" onClick={() => router.push("/api/logout")}>Logout</a></Header>
+                    <Header><a href={`${router.basePath}/api/logout`}>Logout</a></Header>
                 </HeaderContainer>
                 {!!watchedAnime ?
                     <>

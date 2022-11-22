@@ -13,7 +13,7 @@ async function route(req: NextApiRequest, res: NextApiResponse<OauthUrlResponse>
   oauthUrl.searchParams.append("client_id", process.env.CLIENT_ID!)
   oauthUrl.searchParams.append("code_challenge", pkce.code_challenge)
   oauthUrl.searchParams.append("code_challenge_method", "plain")
-  oauthUrl.searchParams.append("redirect_uri", `${process.env.BASE_URL}/api/mal/oauth-callback`)
+  oauthUrl.searchParams.append("redirect_uri", `https://${req.headers.host}/api/mal/oauth-callback`)
 
   res.status(200).json({ url: oauthUrl.href })
 }

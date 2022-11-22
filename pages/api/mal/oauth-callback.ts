@@ -12,7 +12,7 @@ async function route(req: NextApiRequest, res: NextApiResponse) {
         client_secret: process.env.CLIENT_SECRET,
         grant_type: "authorization_code",
         code: query.code,
-        redirect_uri: `${process.env.BASE_URL}/api/mal/oauth-callback`,
+        redirect_uri: `https://${req.headers.host}/api/mal/oauth-callback`,
         code_verifier: req.session.codeVerifier,
     }
 
