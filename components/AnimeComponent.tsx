@@ -77,7 +77,7 @@ const AnimeImage = styled(Image)`
   height: 100%;
 `
 
-const AnimeElement : React.FunctionComponent<Props> = props => {
+const AnimeComponent : React.FunctionComponent<Props> = props => {
     const { anime } = props
     const [hovered, setHovered] = React.useState(false)
 
@@ -95,11 +95,11 @@ const AnimeElement : React.FunctionComponent<Props> = props => {
     return (
         <AnimeContainer ref={drag} onMouseOver={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
             <AnimeImageContainer hovered={hovered}>
-                <AnimeImage src={anime.node.main_picture!.medium} alt={anime.node.title} width={225} height={317} />
+                <AnimeImage src={anime.node.main_picture!.medium} alt={anime.node.title} width={225} height={317} unoptimized={true} />
             </AnimeImageContainer>
             <AnimeTitle hovered={hovered}><a href={`https://myanimelist.net/anime/${anime.node.id}`} target="_blank" rel="noopener noreferrer">{anime.node.title}</a></AnimeTitle>
         </AnimeContainer>
     )
 }
 
-export default AnimeElement
+export default AnimeComponent

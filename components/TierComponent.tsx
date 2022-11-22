@@ -1,6 +1,6 @@
 import {Anime, AnimeScore, parseAnimeScore} from "../lib/aliases";
 import {TierColor, TierColorForAnimeScore} from "../models/TierColor";
-import AnimeElement from "./AnimeElement";
+import AnimeComponent from "./AnimeComponent";
 import React from "react";
 import styled from "styled-components";
 import {useMutationAnimeScore} from "../hooks/useMutationAnimeScore";
@@ -66,7 +66,7 @@ const TierComponent : React.FunctionComponent<Props> = props => {
             </TierHeaderContainer>
             <TierAnimeContainer ref={drop}>
                 {animeList?.map(anime => (
-                    <AnimeElement anime={anime} key={anime.node.id} />
+                    <AnimeComponent anime={anime} key={anime.node.id} />
                 ))}
             </TierAnimeContainer>
         </TierContainer>
