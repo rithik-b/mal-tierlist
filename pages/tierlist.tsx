@@ -46,6 +46,10 @@ const LoadingSpinner = styled.div`
   }
 `
 
+const Table = styled.table`
+    width: 100%;
+`
+
 export const getServerSideProps = withSessionSsr(
     async function getServerSideProps({ req }) {
         try {
@@ -86,11 +90,14 @@ export default function TierListPage({user} : {user: UserResponse}) {
                     <Header><a href={`${router.basePath}/api/logout`}>Logout</a></Header>
                 </HeaderContainer>
                 {!!watchedAnime ?
-                    <>
+                    <Table>
+                        <tr>
+                            <th style={{minWidth: "200px", width: "10%"}}></th>
+                        </tr>
                         {scoreList.map((score) =>
                             <TierComponent key={score} animeList={watchedAnime?.get(score)} animeScore={score} />
                         )}
-                    </>
+                    </Table>
                     :
                     <LoadingContainer>
                         <h1>Loading</h1>

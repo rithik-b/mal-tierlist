@@ -11,20 +11,18 @@ interface Props {
     animeScore: AnimeScore
 }
 
-const TierContainer = styled.div`
-  display: grid;
-  flex-direction: row;
+const TierContainer = styled.tr`
   border: 2px solid black;
   background-color: #222222;
-  grid-template-columns: 1fr 8fr;
+  height: 0px; // Need hack for auto height
 `
 
 const TierHeaderContainer = styled.div<{ tierColor: TierColor }>`
   display: grid;
   grid-template-rows: 1fr auto 1fr;
   grid-template-columns: 1fr auto 1fr;
-  grid-column: 1;
   background-color: ${props => props.tierColor};
+  height: 100%;
 `
 
 const TierHeader = styled.h1`
@@ -38,7 +36,6 @@ const TierAnimeContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  grid-column: 2;
 `
 
 const scoreList: string[] = ["10", "9", "8", "7", "6", "5", "4", "3", "2", "1", "0"]
@@ -61,14 +58,18 @@ const TierComponent : React.FunctionComponent<Props> = props => {
 
     return (
         <TierContainer>
-            <TierHeaderContainer tierColor={TierColorForAnimeScore(animeScore)}>
-                <TierHeader>{animeScore !== 0 ? animeScore : "Not Rated"}</TierHeader>
-            </TierHeaderContainer>
-            <TierAnimeContainer ref={drop}>
-                {animeList?.map(anime => (
-                    <AnimeComponent anime={anime} key={anime.node.id} />
-                ))}
-            </TierAnimeContainer>
+            <td style={{height: "inherit"}}>
+                <TierHeaderContainer tierColor={TierColorForAnimeScore(animeScore)}>
+                    <TierHeader>{animeScore !== 0 ? animeScore : "Not Rated"}</TierHeader>
+                </TierHeaderContainer>
+            </td>
+            <td>
+                <TierAnimeContainer ref={drop}>
+                    {animeList?.map(anime => (
+                        <AnimeComponent anime={anime} key={anime.node.id} />
+                    ))}
+                </TierAnimeContainer>
+            </td>
         </TierContainer>
     )
 }
