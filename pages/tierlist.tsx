@@ -21,7 +21,29 @@ const HeaderContainer = styled.div`
 `
 
 const Header = styled.h2`
-    color: white;
+  color: white;
+`
+
+const LoadingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`
+
+const LoadingSpinner = styled.div`
+  border: 16px solid #808080;
+  border-top: 16px solid #ffffff;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 `
 
 export const getServerSideProps = withSessionSsr(
@@ -69,7 +91,11 @@ export default function TierListPage({user} : {user: UserResponse}) {
                             <TierComponent key={score} animeList={watchedAnime?.get(score)} animeScore={score} />
                         )}
                     </>
-                    : "Loading..."}
+                    :
+                    <LoadingContainer>
+                        <h1>Loading</h1>
+                        <LoadingSpinner />
+                    </LoadingContainer>}
             </div>
         </DndProvider>
     )
