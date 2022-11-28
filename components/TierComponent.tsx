@@ -1,4 +1,4 @@
-import {Anime, AnimeScore, parseAnimeScore} from "../lib/aliases";
+import {Anime, AnimeScore} from "../lib/aliases";
 import {TierColor, TierColorForAnimeScore} from "../models/TierColor";
 import AnimeComponent from "./AnimeComponent";
 import React from "react";

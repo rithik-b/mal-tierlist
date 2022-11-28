@@ -9,17 +9,26 @@ interface Props {
 }
 
 const AnimeContainer = styled.div`
+  @media (max-width: 768px) {
+    width: 84.375px;
+    height: 117.75px;
+  }
+
   width: 168.75px;
   height: 235.5px;
   display: grid;
 `
 
-const AnimeTitle = styled.h4<{ hovered: boolean }>`
+const AnimeTitle = styled.h3<{ hovered: boolean }>`
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+  
   grid-column: 2;
   grid-row: 2;
   text-align: center;
   color: white;
-  
+
   ${props => props.hovered ? `
     animation-name: fadeIn;
     animation-duration: 0.5s;
@@ -27,18 +36,23 @@ const AnimeTitle = styled.h4<{ hovered: boolean }>`
     ` : `
     display: none;
     `}
-  
+
   @keyframes fadeIn {
     from {
-        opacity: 0;
+      opacity: 0;
     }
     to {
-        opacity: 1;
+      opacity: 1;
     }
   };
 `
 
 const AnimeImageContainer = styled.div<{ hovered: boolean }>`
+  @media (max-width: 768px) {
+    width: 84.375px;
+    height: 117.75px;
+  }
+  
   width: 168.75px;
   height: 235.5px;
   grid-column: 1 / span 3;

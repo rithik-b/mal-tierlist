@@ -5,9 +5,11 @@ import TierComponent from "../components/TierComponent";
 import {AnimeScore} from "../lib/aliases";
 import Head from "next/head";
 import React from "react";
-import {useQueryUser} from "../hooks/useQueryUser";
 import {useRouter} from "next/router";
 import styled from "styled-components";
+import getUser from "../lib/getUser";
+import {withSessionSsr} from "../lib/withSessions";
+import {UserResponse} from "../models/UserResponse";
 
 const scoreList: AnimeScore[] = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 
@@ -22,25 +24,43 @@ const Header = styled.h2`
     color: white;
 `
 
-export default function TierListPage() {
-    const router = useRouter()
-    const { data: user, error } = useQueryUser()
-    const watchedAnime = useWatchedAnime()
+export const getServerSideProps = withSessionSsr(
+    async function getServerSideProps({ req }) {
+        try {
+            const user = await getUser(req.session)
+            return {
+                props: {
+                    user
+                }
+            }
+        }
+        catch (e) {
+            return {
+                redirect: {
+                    destination: "/",
+                    permanent: false
+                }
+            }
+        }
+    },
+)
 
-    if (!!error)
-        router.push("/")
+export default function TierListPage({user} : {user: UserResponse}) {
+    const router = useRouter()
+    const watchedAnime = useWatchedAnime()
+    const title = user.name + "'s Anime Tier List"
 
     return (
         <DndProvider backend={HTML5Backend}>
             <div>
                 <Head>
-                    <title>{user?.name ? `${user.name}'s ` : ""}Anime Tier List</title>
+                    <title>{title}</title>
                     <meta name="description" content="Tier your Anime!" />
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
 
                 <HeaderContainer>
-                    <Header>{user?.name ? `${user.name}'s ` : ""}Anime Tier List</Header>
+                    <Header>{title}</Header>
                     <Header><a href={`${router.basePath}/api/logout`}>Logout</a></Header>
                 </HeaderContainer>
                 {!!watchedAnime ?
