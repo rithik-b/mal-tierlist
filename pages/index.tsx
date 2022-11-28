@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import React from "react";
-import {useOauthUrl} from "../hooks/useOauthUrl";
 import {useRouter} from "next/router";
 import {withSessionSsr} from "../lib/withSessions";
 import getUser from "../lib/getUser";
@@ -27,7 +26,6 @@ export const getServerSideProps = withSessionSsr(
 
 export default function Home() {
     const router = useRouter()
-    const oauthUrl = useOauthUrl()
 
     return (
         <div className={styles.container}>
@@ -42,14 +40,12 @@ export default function Home() {
                     Anime Tier List
                 </h1>
 
-                {!!oauthUrl ? (
-                    <div className={styles.grid}>
-                        <a href={oauthUrl.url} className={styles.card}>
-                            <h2>Login &rarr;</h2>
-                            <p>Login to MyAnimeList to get started</p>
-                        </a>
-                    </div>
-                ) : null}
+                <div className={styles.grid}>
+                    <a href={`${router.basePath}/api/mal/oauth-url`} className={styles.card}>
+                        <h2>Login &rarr;</h2>
+                        <p>Login to MyAnimeList to get started</p>
+                    </a>
+                </div>
             </main>
         </div>
   )
