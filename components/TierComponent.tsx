@@ -30,6 +30,7 @@ const TierHeader = styled.h1`
   text-align: center;
   grid-column: 2;
   grid-row: 2;
+  padding: 0px 20px;
 `
 
 const TierAnimeContainer = styled.div`

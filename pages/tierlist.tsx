@@ -27,9 +27,10 @@ const Header = styled.h2`
 const LoadingContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  top: 50%;
+  width: 50%;
+  margin: auto;
   align-items: center;
-  height: 100vh;
 `
 
 const LoadingSpinner = styled.div`
@@ -47,7 +48,7 @@ const LoadingSpinner = styled.div`
 `
 
 const Table = styled.table`
-    width: 100%;
+  width: 100%;
 `
 
 export const getServerSideProps = withSessionSsr(
@@ -92,7 +93,7 @@ export default function TierListPage({user} : {user: UserResponse}) {
                 {!!watchedAnime ?
                     <Table>
                         <tr>
-                            <th style={{minWidth: "200px", width: "10%"}}></th>
+                            <th style={{width: "10%"}}></th>
                         </tr>
                         {scoreList.map((score) =>
                             <TierComponent key={score} animeList={watchedAnime?.get(score)} animeScore={score} />
